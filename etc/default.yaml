@@ -1,0 +1,53 @@
+web:
+  - name: default
+    port: 8080
+    root_path:
+    header_trace_id: X-Request-Id # trace_id
+    web_limiter:                  # web qos limiter
+      enable: true
+      qos: 1000
+
+database:
+  - dialect: mysql
+    url: 127.0.0.1:3306
+    dbName: test
+    user: root
+    password: root
+    debug: true                  # print SQL
+    charset: utf8mb4
+    maxOpen: 200
+    maxIdle: 20
+    connMaxLifetime: 28800      # unit: s
+
+logger:
+  level: INFO
+  trace: true                   # logger traceId
+  timeFormat:                   # timeFormat
+  path:                         # logger path, if not set std
+  fileName: app.log             # loggerFile
+  rollingPolicy: timeAndSize    # timeAndSize time size
+  maxSize: 500MB                # loggerFileMaxSize
+  maxTime: 24h                  # loggerFileMaxTime
+  compress: True                # compress loggerFile
+  cleanBackup: True             # cleanup backup loggerFile
+  backupMaxCount: 10            # backup loggerFile maxCount
+  backupMaxDiskSize: 10GB       # backup loggerFile maxDiskSize
+  color: True                   # logger color
+
+http_client:
+  verbose: false
+
+# cluster config
+cluster:
+  enable: True
+  mode: single # single/cluster
+  nodes:
+    - name: localhost1
+      ip: 127.0.0.1
+      port: 9001
+    - name: localhost2
+      ip: 127.0.0.1
+      port: 9002
+    - name: localhost3
+      ip: 127.0.0.1
+      port: 9003
