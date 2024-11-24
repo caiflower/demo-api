@@ -2,7 +2,7 @@ package dao
 
 import (
 	dbv1 "github.com/caiflower/common-tools/db/v1"
-	"github.com/caiflower/demo-api/model/bean"
+	"{{ .MODULE }}/model/bean"
 )
 
 type TestDao struct {

@@ -1,6 +1,6 @@
 package base
 
-import "github.com/caiflower/demo-api/model/api"
+import "{{ .MODULE }}/model/api"
 
 type DoRequestReq struct {
 	api.Request

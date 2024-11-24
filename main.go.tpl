@@ -10,11 +10,11 @@ import (
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
 	webv1 "github.com/caiflower/common-tools/web/v1"
-	"github.com/caiflower/demo-api/constants"
-	"github.com/caiflower/demo-api/controller/v1/base"
-	"github.com/caiflower/demo-api/dao"
-	"github.com/caiflower/demo-api/service/caller"
-	"github.com/caiflower/demo-api/web"
+	"{{ .MODULE }}/constants"
+	"{{ .MODULE }}/controller/v1/base"
+	"{{ .MODULE }}/dao"
+	"{{ .MODULE }}/service/caller"
+	"{{ .MODULE }}/web"
 )
 
 func init() {

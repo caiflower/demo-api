@@ -4,9 +4,9 @@ import (
 	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/pkg/tools"
 	"github.com/caiflower/common-tools/web/e"
-	"github.com/caiflower/demo-api/dao"
-	"github.com/caiflower/demo-api/model/api/base"
-	"github.com/caiflower/demo-api/model/bean"
+	"{{ .MODULE }}/dao"
+	"{{ .MODULE }}/model/api/base"
+	"{{ .MODULE }}/model/bean"
 )
 
 type HelloWorldController struct {
