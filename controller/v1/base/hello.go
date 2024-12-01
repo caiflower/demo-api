@@ -3,6 +3,7 @@ package base
 import (
 	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/pkg/tools"
+	redisv1 "github.com/caiflower/common-tools/redis/v1"
 	"github.com/caiflower/common-tools/web/e"
 	"github.com/caiflower/demo-api/dao"
 	"github.com/caiflower/demo-api/model/api/base"
@@ -10,7 +11,8 @@ import (
 )
 
 type HelloWorldController struct {
-	TestDao *dao.TestDao `autowrite:""`
+	TestDao *dao.TestDao        `autowrite:""`
+	Redis   redisv1.RedisClient `autowrite:""`
 }
 
 func (c *HelloWorldController) SayHelloWorld() string {

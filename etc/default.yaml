@@ -51,3 +51,15 @@ cluster:
     - name: localhost3
       ip: 127.0.0.1
       port: 9003
+
+# redis config
+redis:
+  - mode:
+    addrs:
+      - 127.0.0.1
+    password:
+    readTimeout: 10s
+    writeTimeout: 20s
+    poolSize:
+    minIdleConns: 20
+    maxConnAge: 80s
