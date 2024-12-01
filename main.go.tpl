@@ -10,7 +10,7 @@ import (
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
 	webv1 "github.com/caiflower/common-tools/web/v1"
-	redisv1 "github.com/caiflower/common-tools/redis/v1""
+	redisv1 "github.com/caiflower/common-tools/redis/v1"
 	"{{ .MODULE }}/constants"
 	"{{ .MODULE }}/controller/v1/base"
 	"{{ .MODULE }}/dao"
