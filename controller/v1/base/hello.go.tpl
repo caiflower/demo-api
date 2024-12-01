@@ -4,7 +4,7 @@ import (
 	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/pkg/tools"
 	"github.com/caiflower/common-tools/web/e"
-	redisv1 "github.com/caiflower/common-tools/redis/v1""
+	redisv1 "github.com/caiflower/common-tools/redis/v1"
 	"{{ .MODULE }}/dao"
 	"{{ .MODULE }}/model/api/base"
 	"{{ .MODULE }}/model/bean"
