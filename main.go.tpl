@@ -10,6 +10,7 @@ import (
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
 	webv1 "github.com/caiflower/common-tools/web/v1"
+	redisv1 "{{ .MODULE }}/common-tools/redis/v1"
 	"{{ .MODULE }}/constants"
 	"{{ .MODULE }}/controller/v1/base"
 	"{{ .MODULE }}/dao"
@@ -29,6 +30,7 @@ func init() {
 	setBean()
 
 	initDatabase()
+	initRedis()
 	initCluster()
 
 	// 依赖注入
@@ -66,6 +68,11 @@ func initDatabase() {
 		panic(fmt.Sprintf("Init database failed. %s", err.Error()))
 	}
 	bean.AddBean(db)
+}
+
+func initRedis() {
+	redisClient := redisv1.NewRedisClient(constants.DefaultConfig.RedisConfig[0])
+	bean.AddBean(redisClient)
 }
 
 func main() {
