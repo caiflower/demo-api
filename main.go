@@ -9,8 +9,8 @@ import (
 	"github.com/caiflower/common-tools/pkg/bean"
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
-	v1 "github.com/caiflower/common-tools/redis/v1"
-	webv1 "github.com/caiflower/common-tools/web/v1"
+	"github.com/caiflower/common-tools/redis/v1"
+	"github.com/caiflower/common-tools/web/v1"
 	"github.com/caiflower/demo-api/constants"
 	"github.com/caiflower/demo-api/controller/v1/base"
 	"github.com/caiflower/demo-api/dao"
@@ -72,7 +72,7 @@ func initDatabase() {
 }
 
 func initRedis() {
-	redisClient := v1.NewRedisClient(constants.DefaultConfig.RedisConfig[0])
+	redisClient := redisv1.NewRedisClient(constants.DefaultConfig.RedisConfig[0])
 	bean.AddBean(redisClient)
 }
 
