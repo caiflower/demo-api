@@ -9,8 +9,8 @@ import (
 	"github.com/caiflower/common-tools/pkg/bean"
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
-	webv1 "github.com/caiflower/common-tools/web/v1"
-	redisv1 "github.com/caiflower/common-tools/redis/v1"
+	"github.com/caiflower/common-tools/web/v1"
+	"github.com/caiflower/common-tools/redis/v1"
 	"{{ .MODULE }}/constants"
 	"{{ .MODULE }}/controller/v1/base"
 	"{{ .MODULE }}/dao"
@@ -55,6 +55,7 @@ func initCluster() {
 	if c, err := cluster.NewCluster(constants.DefaultConfig.ClusterConfig); err != nil {
 		panic(fmt.Sprintf("Init cluster failed. %s", err.Error()))
 	} else {
+		bean.AddBean(c)
 		tracker := cluster.NewDefaultJobTracker(constants.Prop.CallerInterval, c, &caller.DefaultCaller{})
 		tracker.Start()
 		c.StartUp()
