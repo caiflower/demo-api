@@ -55,6 +55,7 @@ func initCluster() {
 	if c, err := cluster.NewCluster(constants.DefaultConfig.ClusterConfig); err != nil {
 		panic(fmt.Sprintf("Init cluster failed. %s", err.Error()))
 	} else {
+		bean.AddBean(c)
 		tracker := cluster.NewDefaultJobTracker(constants.Prop.CallerInterval, c, &caller.DefaultCaller{})
 		tracker.Start()
 		c.StartUp()

@@ -40,7 +40,7 @@ http_client:
 # cluster config
 cluster:
   enable: True
-  mode: single # single/cluster
+  mode: single # single/cluster/redis
   nodes:
     - name: localhost1
       ip: 127.0.0.1
@@ -51,6 +51,12 @@ cluster:
     - name: localhost3
       ip: 127.0.0.1
       port: 9003
+  redisDiscovery:
+    beanName:
+    dataPath: /demo-api
+    electionInterval: 15s
+    electionPeriod: 30s
+    SyncLeaderInterval: 10s
 
 # redis config
 redis:
