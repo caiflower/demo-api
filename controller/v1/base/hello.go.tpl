@@ -3,8 +3,8 @@ package base
 import (
 	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/pkg/tools"
-	"github.com/caiflower/common-tools/web/e"
 	"github.com/caiflower/common-tools/redis/v1"
+	"github.com/caiflower/common-tools/web/e"
 	"{{ .MODULE }}/dao"
 	"{{ .MODULE }}/model/api/base"
 	"{{ .MODULE }}/model/bean"
