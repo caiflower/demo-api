@@ -6,6 +6,7 @@ import (
 	"github.com/caiflower/common-tools/cluster"
 	dbv1 "github.com/caiflower/common-tools/db/v1"
 	"github.com/caiflower/common-tools/global"
+	kafkav2 "github.com/caiflower/common-tools/kafka/v2"
 	"github.com/caiflower/common-tools/pkg/bean"
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
@@ -31,6 +32,7 @@ func init() {
 
 	initDatabase()
 	initRedis()
+	initKafka()
 	initCluster()
 
 	// 依赖注入
@@ -74,6 +76,17 @@ func initDatabase() {
 func initRedis() {
 	redisClient := redisv1.NewRedisClient(constants.DefaultConfig.RedisConfig[0])
 	bean.AddBean(redisClient)
+}
+
+func initKafka() {
+	// v1 和 v2版本的区别是底层依赖的kafka客户端包不一样
+	// v1 基于github.com/confluentinc/confluent-kafka-go，依赖cgo，动态编译
+	// v2 基于github.com/Shopify/sarama
+	consumer := kafkav2.NewConsumerClient(constants.DefaultConfig.KafkaConfig[0])
+	bean.SetBean("consumer", consumer)
+
+	producer := kafkav2.NewProducerClient(constants.DefaultConfig.KafkaConfig[0])
+	bean.SetBean("producer", producer)
 }
 
 func main() {
