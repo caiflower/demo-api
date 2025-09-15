@@ -1,23 +1,12 @@
 web:
   - name: default
     port: 8080
-    root_path:
-    header_trace_id: X-Request-Id # trace_id
-    web_limiter:                  # web qos limiter
+    rootPath:
+    headerTraceID: X-Request-Id # trace_id
+    web_limiter: # web qos limiter
       enable: true
       qos: 1000
-
-database:
-  - dialect: mysql
-    url: 127.0.0.1:3306
-    dbName: test
-    user: root
-    password: root
-    debug: true                  # print SQL
-    charset: utf8mb4
-    maxOpen: 200
-    maxIdle: 20
-    connMaxLifetime: 28800      # unit: s
+    enablePprof: false # 是否开启pprof
 
 logger:
   level: INFO
@@ -33,6 +22,18 @@ logger:
   backupMaxCount: 10            # backup loggerFile maxCount
   backupMaxDiskSize: 10GB       # backup loggerFile maxDiskSize
   color: True                   # logger color
+
+database:
+  - dialect: mysql
+    url: 127.0.0.1:3306
+    dbName: test
+    user: root
+    password: root
+    debug: true                  # print SQL
+    charset: utf8mb4
+    maxOpen: 200
+    maxIdle: 20
+    connMaxLifetime: 28800      # unit: s
 
 http_client:
   verbose: false
@@ -69,3 +70,30 @@ redis:
     poolSize:
     minIdleConns: 20
     maxConnAge: 80s
+
+# kafka config
+kafka:
+  - name: consumer
+    enable: false
+    bootstrapServers:
+      - 127.0.0.1:9092
+    groupId: testGroup4
+    topics:
+      - testTopic
+    securityProtocol: SASL_PLAINTEXT
+    saslMechanism: SCRAM-SHA-256
+    saslUsername: user1
+    saslPassword:
+    consumerAutoOffsetReset: earliest
+  - name: producer
+    enable: false
+    bootstrapServers:
+      - 127.0.0.1:9092
+    groupId: testGroup4
+    topics:
+      - testTopic
+    securityProtocol: SASL_PLAINTEXT
+    saslMechanism: SCRAM-SHA-256
+    saslUsername: user1
+    saslPassword:
+    consumerAutoOffsetReset: earliest

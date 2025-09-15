@@ -1,6 +1,7 @@
 package base
 
 import (
+	xkafka "github.com/caiflower/common-tools/kafka"
 	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/pkg/tools"
 	"github.com/caiflower/common-tools/redis/v1"
@@ -11,8 +12,10 @@ import (
 )
 
 type HelloWorldController struct {
-	TestDao *dao.TestDao `autowrite:""`
-	Redis   redisv1.RedisClient `autowrite:""`
+	TestDao  *dao.TestDao        `autowired:""`
+	Redis    redisv1.RedisClient `autowired:""`
+	Consumer xkafka.Consumer     `autowired:"consumer"`
+	Producer xkafka.Producer     `autowired:"producer"`
 }
 
 func (c *HelloWorldController) SayHelloWorld() string {
