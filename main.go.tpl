@@ -16,6 +16,7 @@ import (
 	"{{ .MODULE }}/controller/v1/base"
 	"{{ .MODULE }}/dao"
 	"{{ .MODULE }}/service/caller"
+)
 
 func init() {
 	// initConfig
