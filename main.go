@@ -51,6 +51,7 @@ func init() {
 	initDatabase()
 	initRedis()
 	initCluster()
+	initWeb()
 
 	// 依赖注入
 	bean.Ioc()
