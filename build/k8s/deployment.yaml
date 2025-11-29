@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-api
+  namespace: demo-api
+  labels:
+    app: demo-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-api
+  template:
+    metadata:
+      labels:
+        app: demo-api
+    spec:
+      containers:
+      - name: demo-api
+        image: lijinlong100-cn-north-1.jcr.service.jdcloud.com/demo-api:latest
+        command:
+          - /usr/local/bin/demo-api -config /etc/demo-api
+        ports:
+        - containerPort: 8080
+        env:
+        - name: GOMAXPROCS
+          value: "2"
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: "1"
+            memory: 2Gi
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/demo-api
+      volumes:
+      - name: config-volume
+        configMap:
+          name: demo-api-config
