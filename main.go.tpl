@@ -1,11 +1,14 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
 
 	"github.com/caiflower/common-tools/cluster"
 	dbv1 "github.com/caiflower/common-tools/db/v1"
 	"github.com/caiflower/common-tools/global"
+	"github.com/caiflower/common-tools/global/env"
 	kafkav2 "github.com/caiflower/common-tools/kafka/v2"
 	"github.com/caiflower/common-tools/pkg/bean"
 	"github.com/caiflower/common-tools/pkg/http"
@@ -19,6 +22,15 @@ import (
 )
 
 func init() {
+	var configPath string
+	flag.StringVar(&configPath, "config", env.ConfigPath, "configure file!")
+	flag.Usage = func() {
+		_, _ = fmt.Fprintf(os.Stderr, "Usage: %s [-config <file_path>] \n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+	env.ConfigPath = configPath
+
 	// initConfig
 	constants.InitConfig()
 	// initLogger
