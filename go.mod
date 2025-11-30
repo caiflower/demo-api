@@ -1,6 +1,8 @@
 module github.com/caiflower/demo-api
 
-go 1.18
+go 1.23
+
+toolchain go1.24.1
 
 replace github.com/json-iterator/go v1.1.12 => github.com/caiflower/json-iterator v1.1.12
 
