@@ -44,6 +44,9 @@ func init() {
 	global.DefaultResourceManger.Add(logger.DefaultLogger())
 	// initDefaultWeb
 	webv1.InitDefaultHttpServer(constants.DefaultConfig.WebConfig[0])
+	config := webv1.NetpollConfig{constants.DefaultConfig.WebConfig[0]}
+	config.Port = 8081
+	webv1.InitDefaultNetpollHttpServer(config)
 
 	addController()
 	setBean()
@@ -59,6 +62,7 @@ func init() {
 
 func addController() {
 	webv1.AddController(&base.HelloWorldController{})
+	webv1.DefaultNetpollHttpServer.AddController(&base.HelloWorldController{})
 }
 
 func setBean() {
@@ -102,6 +106,7 @@ func initRedis() {
 
 func initWeb() {
 	global.DefaultResourceManger.AddDaemon(webv1.DefaultHttpServer)
+	global.DefaultResourceManger.AddDaemon(webv1.DefaultNetpollHttpServer)
 }
 
 func main() {
