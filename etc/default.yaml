@@ -59,7 +59,7 @@ redis:
   - mode:
     addrs:
       - redis-master.app.svc.cluster.local:6379
-    password: test-user
+    password: qq1339811657
     readTimeout: 10s
     writeTimeout: 20s
     poolSize: 100

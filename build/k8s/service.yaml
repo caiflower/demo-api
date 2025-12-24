@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-api-service
-  namespace: demo-api
+  name: test-api-service
+  namespace: test-api
 spec:
   selector:
-    app: demo-api
+    app: test-api
   ports:
     - protocol: TCP
       port: 80

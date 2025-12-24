@@ -4,10 +4,18 @@ import "github.com/caiflower/demo-api/model/api"
 
 type DoRequestReq struct {
 	api.Request
-	Input string `verf:""`
+	ContentType string `header:"Content-Type"`
+	Input       string `verf:""`
+	Name        string `param:"name"`
 }
 
 type DoRequestRes struct {
-	RequestId string
-	Input     string
+	RequestId   string
+	Input       string
+	ContentType string
+	Name        string
+}
+
+type RepeatRequest struct {
+	Repeat int `path:"repeat"`
 }

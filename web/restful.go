@@ -3,11 +3,16 @@ package web
 import (
 	"net/http"
 
-	. "github.com/caiflower/common-tools/web/v1"
+	. "github.com/caiflower/common-tools/web"
+	. "github.com/caiflower/common-tools/web/router/controller"
+	"github.com/caiflower/demo-api/controller/v1/base"
 )
 
-func register() {
-	Register(NewRestFul().Method(http.MethodGet).Version("v1").Controller("base.HelloWorldController").Path("/helloworld").Action("SayHelloWorld"))
-	Register(NewRestFul().Method(http.MethodGet).Version("v1").Controller("base.HelloWorldController").Path("/error").Action("ReturnError"))
-	Register(NewRestFul().Method(http.MethodPost).Version("v1").Controller("base.HelloWorldController").Path("/req").Action("DoRequest"))
+func register(engine *Engine) {
+	engine.AddController(&base.HelloWorldController{})
+	group := NewRestFul().Version("v1").Controller("base.HelloWorldController")
+	engine.Register(group.Method(http.MethodGet).Path("/helloworld").Action("SayHelloWorld"))
+	engine.Register(group.Method(http.MethodGet).Path("/error").Action("ReturnError"))
+	engine.Register(group.Method(http.MethodPost).Path("/req").Action("DoRequest"))
+	engine.Register(group.Method(http.MethodGet).Path("/repeat/:repeat").Action("Repeat"))
 }
