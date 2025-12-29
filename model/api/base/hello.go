@@ -6,7 +6,7 @@ type DoRequestReq struct {
 	api.Request
 	ContentType string `header:"Content-Type"`
 	Input       string `verf:""`
-	Name        string `param:"name"`
+	Name        string `query:"name"`
 }
 
 type DoRequestRes struct {

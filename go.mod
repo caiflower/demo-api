@@ -4,8 +4,8 @@ go 1.23
 
 replace (
 	github.com/caiflower/common-tools => ../common-tools
-	github.com/json-iterator/go v1.1.12 => github.com/caiflower/json-iterator v1.1.12
 	github.com/cloudwego/hertz v0.10.3 => ../hertz
+	github.com/json-iterator/go v1.1.12 => github.com/caiflower/json-iterator v1.1.12
 )
 
 require (
@@ -81,7 +81,7 @@ require (
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230822172742-b8732ec3820d // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d // indirect
-	google.golang.org/grpc v1.57.0 // indirect
+	google.golang.org/grpc v1.57.2 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

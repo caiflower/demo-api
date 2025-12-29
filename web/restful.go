@@ -9,10 +9,12 @@ import (
 )
 
 func register(engine *Engine) {
-	engine.AddController(&base.HelloWorldController{})
-	group := NewRestFul().Version("v1").Controller("base.HelloWorldController")
-	engine.Register(group.Method(http.MethodGet).Path("/helloworld").Action("SayHelloWorld"))
-	engine.Register(group.Method(http.MethodGet).Path("/error").Action("ReturnError"))
-	engine.Register(group.Method(http.MethodPost).Path("/req").Action("DoRequest"))
-	engine.Register(group.Method(http.MethodGet).Path("/repeat/:repeat").Action("Repeat"))
+	helloController := engine.AddController(&base.HelloWorldController{})
+	v1 := NewRestFul().Group("/v1")
+	{
+		engine.Register(v1.Method(http.MethodGet).Path("/helloworld").RegisterMethod(helloController.GetMethod("SayHelloWorld")))
+		engine.Register(v1.Method(http.MethodGet).Path("/error").RegisterMethod(helloController.GetMethod("ReturnError")))
+		engine.Register(v1.Method(http.MethodPost).Path("/req").RegisterMethod(helloController.GetMethod("DoRequest")))
+		engine.Register(v1.Method(http.MethodGet).Path("/repeat/:repeat").RegisterMethod(helloController.GetMethod("Repeat")))
+	}
 }

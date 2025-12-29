@@ -29,7 +29,7 @@ func init() {
 	runtime.SetMutexProfileFraction(1)
 
 	// 限制 CPU 使用数量为 2 核
-	//runtime.GOMAXPROCS(2)
+	runtime.GOMAXPROCS(4)
 
 	// initConfig
 	constants.InitConfig()

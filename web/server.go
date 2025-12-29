@@ -9,8 +9,9 @@ import (
 func Init() {
 	engine := web.Default(
 		config.WithAddr(":8081"),
-		config.WithH2C(true),
+		config.WithEnablePprof(true),
 	)
+
 	register(engine)
 	global.DefaultResourceManger.AddDaemon(engine)
 
