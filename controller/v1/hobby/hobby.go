@@ -26,3 +26,7 @@ func (h *HobbyImpl) Search(ctx context.Context, req *hobby.SearchRequest) (*hobb
 	}
 	return nil, status.Errorf(codes.OutOfRange, fmt.Sprintf("query %v is not impl", req.Query))
 }
+
+func (h *HobbyImpl) Search3(req *hobby.SearchRequest) (*hobby.SearchResponse, error) {
+	return h.Search(context.Background(), req)
+}

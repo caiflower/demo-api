@@ -9,7 +9,7 @@ import (
 )
 
 func Hertz() {
-	h := server.Default(server.WithH2C(true))
+	h := server.Default(server.WithH2C(false))
 	h.StaticFS("/", &app.FS{Root: "./", GenerateIndexPages: true})
 
 	v1 := h.Group("/v1")

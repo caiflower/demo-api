@@ -7,6 +7,7 @@ import (
 	. "github.com/caiflower/common-tools/web/router/controller"
 	"github.com/caiflower/demo-api/controller/v1/base"
 	"github.com/caiflower/demo-api/controller/v1/hobby"
+	apihobby "github.com/caiflower/demo-api/model/api/hobby"
 )
 
 func register(engine *Engine) {
@@ -21,7 +22,8 @@ func register(engine *Engine) {
 	}
 
 	{
-		hobbyController := engine.AddController(&hobby.HobbyImpl{})
-		engine.Register(v1.Method(http.MethodGet).Path("/hobby").RegisterMethod(hobbyController.GetMethod("Search")))
+		hobbyController := engine.RegisterGRPCService(&apihobby.Hobby_ServiceDesc, &hobby.HobbyImpl{})
+		engine.Register(v1.Method(http.MethodGet).Path("/hobby").RegisterMethod(hobbyController.GetMethod("Search3")))
+		engine.Register(v1.Method(http.MethodGet).Path("/hobby/search").RegisterGrpcMethod(hobbyController.GetGrpcMethodDesc("Search")))
 	}
 }
