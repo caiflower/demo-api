@@ -1,16 +1,11 @@
 module github.com/caiflower/demo-api
 
-go 1.23
+go 1.18
 
-replace (
-	github.com/caiflower/common-tools => ../common-tools
-	github.com/cloudwego/hertz v0.10.3 => ../hertz
-	github.com/json-iterator/go v1.1.12 => github.com/caiflower/json-iterator v1.1.12
-)
+replace github.com/caiflower/common-tools => ../common-tools
 
 require (
 	github.com/caiflower/common-tools v0.0.0-20251129090810-3869699f1931
-	github.com/cloudwego/hertz v0.10.3
 	google.golang.org/grpc v1.57.2
 	google.golang.org/protobuf v1.34.1
 )
@@ -19,15 +14,11 @@ require (
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bytedance/gopkg v0.1.1 // indirect
-	github.com/bytedance/sonic v1.14.0 // indirect
-	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/cloudwego/base64x v0.1.5 // indirect
 	github.com/cloudwego/gopkg v0.1.4 // indirect
-	github.com/cloudwego/netpoll v0.7.2 // indirect
+	github.com/cloudwego/netpoll v0.7.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-redis/redis/extra/rediscmd/v8 v8.11.5 // indirect
@@ -38,24 +29,18 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.17.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
-	github.com/modern-go/gls v0.0.0-20220109145502-612d0167dce5 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nyaruka/phonenumbers v1.0.55 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
+	github.com/petermattis/goid v0.0.0-20260113132338-7c7de50cc741 // indirect
 	github.com/prometheus/client_golang v1.12.2 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
-	github.com/tidwall/gjson v1.14.4 // indirect
-	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/uptrace/bun v1.0.19 // indirect
 	github.com/uptrace/bun/dialect/mysqldialect v1.0.19 // indirect
 	github.com/uptrace/uptrace-go v1.14.0 // indirect
@@ -74,7 +59,6 @@ require (
 	go.opentelemetry.io/otel/sdk/metric v0.37.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.0.0 // indirect
-	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
 	golang.org/x/exp v0.0.0-20220827204233-334a2380cb91 // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/net v0.24.0 // indirect

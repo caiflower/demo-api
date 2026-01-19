@@ -9,15 +9,9 @@ import (
 func Init() {
 	engine := web.Default(
 		config.WithAddr(":8081"),
+		config.WithEnableSwagger(true),
 	)
 
 	register(engine)
 	global.DefaultResourceManger.AddDaemon(engine)
-
-	engine1 := web.Default(
-		config.WithMode(config.ServerModeStandard))
-	register(engine1)
-	global.DefaultResourceManger.AddDaemon(engine1)
-
-	go Hertz()
 }

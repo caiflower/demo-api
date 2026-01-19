@@ -11,6 +11,8 @@ import (
 	"github.com/caiflower/common-tools/pkg/bean"
 	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
+	"github.com/caiflower/common-tools/web/common/goai"
+	"github.com/caiflower/common-tools/web/common/resp"
 	"github.com/caiflower/demo-api/constants"
 	"github.com/caiflower/demo-api/service/caller"
 	"github.com/caiflower/demo-api/web"
@@ -25,8 +27,9 @@ func init() {
 	}
 	flag.Parse()
 	env.ConfigPath = configPath
-	runtime.SetBlockProfileRate(1)
-	runtime.SetMutexProfileFraction(1)
+
+	goai.Default().Config.CommonResponse = resp.Result{}
+	goai.Default().Config.CommonResponseDataField = "data"
 
 	// 限制 CPU 使用数量为 2 核
 	runtime.GOMAXPROCS(4)

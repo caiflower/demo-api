@@ -5,7 +5,7 @@ import "github.com/caiflower/demo-api/model/api"
 type DoRequestReq struct {
 	api.Request
 	ContentType string `header:"Content-Type"`
-	Input       string `verf:""`
+	Input       string `verf:"required"`
 	Name        string `query:"name"`
 }
 
