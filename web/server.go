@@ -8,7 +8,6 @@ import (
 
 func Init() {
 	engine := web.Default(
-		config.WithAddr(":8081"),
 		config.WithEnableSwagger(true),
 	)
 

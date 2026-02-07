@@ -6,7 +6,7 @@ import (
 )
 
 type TestDao struct {
-	DB dbv1.IDB `autowrite:""`
+	DB dbv1.DB `autowired:""`
 }
 
 func (d *TestDao) BatchInsert(dao []*bean.Test) error {
