@@ -3,26 +3,39 @@ package main
 import (
 	"fmt"
 
-	"github.com/caiflower/common-tools/cluster"
-	dbv1 "github.com/caiflower/common-tools/db/v1"
 	"github.com/caiflower/common-tools/global"
+	"github.com/caiflower/common-tools/global/env"
 	kafkav2 "github.com/caiflower/common-tools/kafka/v2"
 	"github.com/caiflower/common-tools/pkg/bean"
-	"github.com/caiflower/common-tools/pkg/http"
 	"github.com/caiflower/common-tools/pkg/logger"
-	"github.com/caiflower/common-tools/redis/v1"
-	"github.com/caiflower/common-tools/web/v1"
-	"{{ .MODULE }}/constants"
-	"{{ .MODULE }}/controller/v1/base"
-	"{{ .MODULE }}/dao"
-	"{{ .MODULE }}/service/caller"
+	redisv1 "github.com/caiflower/common-tools/redis/v1"
+	webv1 "github.com/caiflower/common-tools/web/v1"
+	"github.com/caiflower/demo-api/constants"
+	"github.com/caiflower/demo-api/controller/v1/base"
+	"github.com/caiflower/demo-api/dao"
+	"github.com/caiflower/demo-api/service/caller"
 )
 
 func init() {
+	var configPath string
+	flag.StringVar(&configPath, "config", env.ConfigPath, "configure file!")
+	flag.Usage = func() {
+		_, _ = fmt.Fprintf(os.Stderr, "Usage: %s [-config <file_path>] \n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+	env.ConfigPath = configPath
+	runtime.SetBlockProfileRate(1)
+	runtime.SetMutexProfileFraction(1)
+
+	// 限制 CPU 使用数量为 2 核
+	runtime.GOMAXPROCS(2)
+
 	// initConfig
 	constants.InitConfig()
 	// initLogger
 	logger.InitLogger(&constants.DefaultConfig.LoggerConfig)
+	global.DefaultResourceManger.Add(logger.DefaultLogger())
 	// initDefaultWeb
 	webv1.InitDefaultHttpServer(constants.DefaultConfig.WebConfig[0])
 
@@ -31,7 +44,6 @@ func init() {
 
 	initDatabase()
 	initRedis()
-	initKafka()
 	initCluster()
 	initWeb()
 
@@ -49,6 +61,11 @@ func setBean() {
 
 	// init dao
 	bean.AddBean(&dao.TestDao{})
+	consumerClient := kafkav2.NewConsumerClient(constants.DefaultConfig.KafkaConfig[0])
+	consumerClient.Listen(func(message interface{}) {
+		fmt.Println(message)
+	})
+	bean.AddBean(consumerClient)
 
 	// init service
 }
@@ -57,7 +74,6 @@ func initCluster() {
 	if c, err := cluster.NewCluster(constants.DefaultConfig.ClusterConfig); err != nil {
 		panic(fmt.Sprintf("Init cluster failed. %s", err.Error()))
 	} else {
-        bean.AddBean(c)
 		tracker := cluster.NewDefaultJobTracker(constants.Prop.CallerInterval, &caller.DefaultCaller{})
 		_ = c.AddJobTracker(tracker)
 		global.DefaultResourceManger.AddDaemon(c)
@@ -76,17 +92,6 @@ func initDatabase() {
 func initRedis() {
 	redisClient := redisv1.NewRedisClient(constants.DefaultConfig.RedisConfig[0])
 	bean.AddBean(redisClient)
-}
-
-func initKafka() {
-	// v1 和 v2版本的区别是底层依赖的kafka客户端包不一样
-	// v1 基于github.com/confluentinc/confluent-kafka-go，依赖cgo，动态编译
-	// v2 基于github.com/Shopify/sarama
-	consumer := kafkav2.NewConsumerClient(constants.DefaultConfig.KafkaConfig[0])
-	bean.SetBean("consumer", consumer)
-
-	producer := kafkav2.NewProducerClient(constants.DefaultConfig.KafkaConfig[0])
-	bean.SetBean("producer", producer)
 }
 
 func initWeb() {

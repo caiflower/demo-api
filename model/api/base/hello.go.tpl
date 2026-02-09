@@ -4,10 +4,18 @@ import "{{ .MODULE }}/model/api"
 
 type DoRequestReq struct {
 	api.Request
-	Input string `verf:""`
+	ContentType string `header:"Content-Type" json:"-"`
+	Input       string `verf:"required" json:"input"`
+	Name        string `json:"name"`
 }
 
 type DoRequestRes struct {
-	RequestId string
-	Input     string
+	RequestId   string
+	Input       string
+	ContentType string
+	Name        string
+}
+
+type RepeatRequest struct {
+	Repeat int `path:"repeat"`
 }

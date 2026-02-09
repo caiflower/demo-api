@@ -1,5 +1,5 @@
 package api
 
 type Request struct {
-	RequestId string `header:"X-Request-Id"`
+	RequestId string `header:"X-Request-Id" json:"-"`
 }
