@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .PROJECT_NAME }}-service
-  namespace: {{ .PROJECT_NAME }}
+  namespace: default
 spec:
   selector:
     app: {{ .PROJECT_NAME }}

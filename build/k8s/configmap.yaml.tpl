@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .PROJECT_NAME }}-config
-  namespace: {{ .PROJECT_NAME }}
+  namespace: default
 data:
   config.yaml: |
     caller_interval: 10
