@@ -4,11 +4,15 @@ import (
 	"github.com/caiflower/common-tools/global"
 	"github.com/caiflower/common-tools/web"
 	"github.com/caiflower/common-tools/web/app/server/config"
+	"github.com/caiflower/demo-api/constants"
 )
 
 func Init() {
+	cfg := constants.DefaultConfig.WebConfig[0]
 	engine := web.Default(
-		config.WithEnableSwagger(true),
+		config.WithAddr(cfg.Addr),
+		config.WithEnableSwagger(cfg.EnableSwagger),
+		config.WithEnablePprof(cfg.EnablePprof),
 	)
 
 	register(engine)

@@ -2,10 +2,8 @@ module github.com/caiflower/demo-api
 
 go 1.18
 
-replace github.com/caiflower/common-tools => ../common-tools
-
 require (
-	github.com/caiflower/common-tools v0.0.0-20251129090810-3869699f1931
+	github.com/caiflower/common-tools v0.0.0-20260209052816-ed6b86b56da0
 	google.golang.org/grpc v1.57.2
 	google.golang.org/protobuf v1.34.1
 )

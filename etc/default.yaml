@@ -1,12 +1,20 @@
 web:
-  - name: default
-    port: 8080
-    rootPath:
-    headerTraceID: X-Request-Id # trace_id
-    web_limiter:                  # web qos limiter
-      enable: true
-      qos: 1000
-    enablePprof: true
+  - addr: 0.0.0.0:8080
+
+cluster:
+  enable: True
+  mode: single
+  nodes:
+    - name: localhost1
+      ip: 127.0.0.1
+      port: 9001
+      local: true
+    - name: localhost2
+      ip: 127.0.0.1
+      port: 9002
+    - name: localhost3
+      ip: 127.0.0.1
+      port: 9003
 
 database:
   - dialect: mysql
@@ -20,57 +28,16 @@ database:
     maxIdle: 20
     connMaxLifetime: 28800      # unit: s
 
-logger:
-  level: TRACE
-  trace: true                   # logger traceId
-  timeFormat:                   # timeFormat
-  path:                         # logger path, if not set std
-  fileName: app.log             # loggerFile
-  rollingPolicy: timeAndSize    # timeAndSize time size
-  maxSize: 500MB                # loggerFileMaxSize
-  maxTime: 24h                  # loggerFileMaxTime
-  compress: True                # compress loggerFile
-  cleanBackup: True             # cleanup backup loggerFile
-  backupMaxCount: 10            # backup loggerFile maxCount
-  backupMaxDiskSize: 10GB       # backup loggerFile maxDiskSize
-  color: True                   # logger color
-
-http_client:
-  verbose: false
-
-# cluster config
-cluster:
-  enable: True
-  mode: single # single/cluster
-  nodes:
-    - name: localhost1
-      ip: 127.0.0.1
-      port: 9001
-      local: true
-    - name: localhost2
-      ip: 127.0.0.1
-      port: 9002
-    - name: localhost3
-      ip: 127.0.0.1
-      port: 9003
-
-# redis config
 redis:
   - mode:
     addrs:
       - redis-master.app.svc.cluster.local:6379
-    password: qq1339811657
+    password: test 
     readTimeout: 10s
     writeTimeout: 20s
     poolSize: 100
     minIdleConns: 20
     maxConnAge: 80s
-
-telemetry:
-#  dns: https://a_p726QqDpN5Zv3XVYA0Hg@api.uptrace.dev/test-demo?grpc=4317
-  dns: http://project2_secret_token@uptrace.app.svc.cluster.local:14318/My project?grpc=14317
-  serviceName: test-api
-  deploymentEnv: dev
 
 kafka:
   - name: testConsumer
@@ -85,3 +52,11 @@ kafka:
     saslUsername: user1
     saslPassword: test-user
     consumerAutoOffsetReset: earliest
+
+logger:
+  level: TRACE
+  trace: true                   # logger traceId
+  timeFormat:                   # timeFormat
+  path:                         # logger path, if not set std
+  fileName: app.log             # loggerFile
+  color: True                   # logger color
