@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-api
-  namespace: demo-api
+  name: {{ .PROJECT_NAME }}
+  namespace: {{ .PROJECT_NAME }}
   labels:
-    app: demo-api
+    app: {{ .PROJECT_NAME }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-api
+      app: {{ .PROJECT_NAME }}
   template:
     metadata:
       labels:
-        app: demo-api
+        app: {{ .PROJECT_NAME }}
     spec:
       containers:
-      - name: demo-api
-        image: lijinlong100-cn-north-1.jcr.service.jdcloud.com/demo-api:latest
+      - name: {{ .PROJECT_NAME }}
+        image: lijinlong100-cn-north-1.jcr.service.jdcloud.com/{{ .PROJECT_NAME }}:latest
         command:
-          - /usr/local/bin/demo-api -config /etc/demo-api
+          - /usr/local/bin/{{ .PROJECT_NAME }} -config /etc/{{ .PROJECT_NAME }}
         ports:
         - containerPort: 8080
         env:
@@ -46,8 +46,8 @@ spec:
           periodSeconds: 5
         volumeMounts:
         - name: config-volume
-          mountPath: /etc/demo-api
+          mountPath: /etc/{{ .PROJECT_NAME }}
       volumes:
       - name: config-volume
         configMap:
-          name: demo-api-config
+          name: {{ .PROJECT_NAME }}-config

@@ -5,7 +5,7 @@ import (
 
 	dbv1 "github.com/caiflower/common-tools/db/v1"
 	"github.com/caiflower/common-tools/pkg/bean"
-	"github.com/caiflower/demo-api/constants"
+	"{{ .MODULE }}/constants"
 )
 
 func Init() {

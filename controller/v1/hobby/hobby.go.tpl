@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/caiflower/demo-api/model/api/hobby"
+	"{{ .MODULE }}/model/api/hobby"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

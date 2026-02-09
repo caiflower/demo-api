@@ -5,9 +5,9 @@ import (
 
 	"github.com/caiflower/common-tools/web"
 	"github.com/caiflower/common-tools/web/router/controller"
-	"github.com/caiflower/demo-api/controller/v1/base"
-	"github.com/caiflower/demo-api/controller/v1/hobby"
-	apihobby "github.com/caiflower/demo-api/model/api/hobby"
+	"{{ .MODULE }}/controller/v1/base"
+	"{{ .MODULE }}/controller/v1/hobby"
+	apihobby "{{ .MODULE }}/model/api/hobby"
 )
 
 func register(engine *web.Engine) {

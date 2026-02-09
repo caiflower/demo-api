@@ -2,7 +2,7 @@ syntax = "proto3"; // 默认走的是 proto2,所以需要强制指定，pb3比pb
 
 package proto; //当前文件的package
 
-option go_package="github.com/caiflower/demo-api/model/api/hobby;hobby";// go的包路径(切记一定要写全，和go的import有关系，如果写 dto，那么别人引入你就是 dto了，显然是引入不到的，一定要写全)
+option go_package="{{ .MODULE }}/model/api/hobby;hobby";// go的包路径(切记一定要写全，和go的import有关系，如果写 dto，那么别人引入你就是 dto了，显然是引入不到的，一定要写全)
 
 message SearchRequest {
   // 每个字段都有四块组成: 字段规则，类型，名称，编号

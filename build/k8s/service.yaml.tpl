@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-api-service
-  namespace: test-api
+  name: {{ .PROJECT_NAME }}-service
+  namespace: {{ .PROJECT_NAME }}
 spec:
   selector:
-    app: test-api
+    app: {{ .PROJECT_NAME }}
   ports:
     - protocol: TCP
       port: 80

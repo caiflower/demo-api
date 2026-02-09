@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: test-api
+  name: {{ .PROJECT_NAME }}

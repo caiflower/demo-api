@@ -5,7 +5,7 @@ import (
 
 	"github.com/caiflower/common-tools/cluster"
 	"github.com/caiflower/common-tools/global"
-	"github.com/caiflower/demo-api/constants"
+	"{{ .MODULE }}/constants"
 )
 
 func Init() {

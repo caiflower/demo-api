@@ -4,7 +4,7 @@ import (
 	"github.com/caiflower/common-tools/global"
 	"github.com/caiflower/common-tools/web"
 	"github.com/caiflower/common-tools/web/app/server/config"
-	"github.com/caiflower/demo-api/constants"
+	"{{ .MODULE }}/constants"
 )
 
 func Init() {
