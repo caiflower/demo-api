@@ -15,3 +15,10 @@ func Init() {
 	}
 	bean.AddBean(db)
 }
+
+// Auto-generate DAO layer: configure database, tables and auth info
+//go:generate go run -mod=mod github.com/caiflower/common-tools/db/v1/cmd@release-v0.1.0 \
+  -dsn 'mysql:root:root@tcp(127.0.0.1:3306)/test_db' \
+  -pkg "{{ .MODULE }}/dao" \
+  -tables user,order \
+  -dao_out .
