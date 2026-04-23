@@ -1,9 +1,9 @@
 # Go parameters
 GOBUILD=GO111MODULE=on go build
 GOCLEAN=GO111MODULE=on go clean
-BINARY_NAME=demo-api
+BINARY_NAME={{ .PROJECT_NAME }}
 COMMITID=$(shell git rev-parse HEAD | cut -c1-6)
-IMAGE_NAME=register/demo-api:$(COMMITID)
+IMAGE_NAME=register/{{ .PROJECT_NAME }}:$(COMMITID)
 
 # Default target
 all: build

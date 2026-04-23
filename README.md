@@ -7,7 +7,7 @@ go run main.go -config ./etc
 ## 项目结构
 
 ```
-demo-api/
+{{ .PROJECT_NAME }}/
 ├── build/              # 构建和部署配置
 │   ├── docker/
 │   └── k8s/

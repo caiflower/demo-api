@@ -862,8 +862,8 @@ github.com/buger/jsonparser v1.1.1/go.mod h1:6RYKKt7H4d4+iWqouImQ9R2FZql3VbhNgx2
 github.com/bugsnag/bugsnag-go v0.0.0-20141110184014-b1d153021fcd/go.mod h1:2oa8nejYd4cQ/b0hMIopN0lCRxU0bueqREvZLWFrtK8=
 github.com/bugsnag/osext v0.0.0-20130617224835-0dd3f918b21b/go.mod h1:obH5gd0BsqsP2LwDJ9aOkm/6J86V6lyAXCoQWGw3K50=
 github.com/bugsnag/panicwrap v0.0.0-20151223152923-e2c28503fcd0/go.mod h1:D/8v3kj0zr8ZAKg1AQ6crr+5VwKN5eIywRkfhyM/+dE=
-github.com/caiflower/common-tools v0.0.0-20251129090810-3869699f1931 h1:g+CMBOKfGc1aRl8v2ChN0Oqjf1W42Q9cNubp7IaM39k=
-github.com/caiflower/common-tools v0.0.0-20251129090810-3869699f1931/go.mod h1:B3HNBLXPBygx8ABZIDu361566031pyWCa/hrDVU0anI=
+github.com/caiflower/common-tools v0.0.0-20260421084004-f34be8d5ef38 h1:V5TG+mxmumkv4Aq7WQ+J6ha8GS9as5JZ+ITC1kzIoC8=
+github.com/caiflower/common-tools v0.0.0-20260421084004-f34be8d5ef38/go.mod h1:JcbHwcavnX+s0Y75H+AXi6f9d1ChbKw6QZI0acmwuNE=
 github.com/caiflower/json-iterator v1.1.12 h1:WpdqSe44A9GKcTNw7DkDNNJUQNM7tM4RHbNRx5edkjQ=
 github.com/caiflower/json-iterator v1.1.12/go.mod h1:5ADwiSgC1VslIB/m72eUebZfXV/cUSEE7ZGntUPpmz8=
 github.com/cenkalti/backoff/v4 v4.1.1/go.mod h1:scbssz8iZGpm3xbr14ovlUdkxfGXNInqkPWOWmG2CLw=
