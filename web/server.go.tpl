@@ -13,6 +13,7 @@ func Init() {
 		config.WithAddr(cfg.Addr),
 		config.WithEnableSwagger(cfg.EnableSwagger),
 		config.WithEnablePprof(cfg.EnablePprof),
+		config.WithMetrics(cfg.EnableMetrics),
 	)
 
 	register(engine)
