@@ -1,0 +1,62 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+context: |
+  Tech stack: Go 1.18
+  Framework: github.com/caiflower/common-tools
+  Database: MySQL (using bun ORM)
+  
+  Architecture Patterns:
+  - Resource Management: Use global.DefaultResourceManger for lifecycle management
+    - For daemon services: Implement global.DaemonResource interface (Name(), Start() error, Close())
+    - Register in init() function: global.DefaultResourceManger.AddDaemon(&Service{})
+    - The manager handles graceful shutdown automatically via Signal()
+  
+  - Dependency Injection: Use github.com/caiflower/common-tools/pkg/bean
+    - Mark dependencies with `autowired:""` tag in struct fields
+    - Call bean.Ioc() after all components are initialized
+    - Dependencies are automatically injected based on type matching
+  
+  - Configuration: Use yaml configuration in /etc/config.yaml
+    - Load via constants.InitConfig()
+    - Access via constants.Prop or constants.DefaultConfig
+  
+  - Database Access: Use DAO pattern with bun ORM
+    - DAO interfaces defined in /dao package
+    - Models defined in /dao/model package
+    - Use `autowired:""` for DAO dependencies in services
+  
+  - HTTP Client: Use github.com/caiflower/common-tools/web/app/client
+    - For external HTTP requests, use the client package from common-tools
+    - Do not use standard library http.Client directly for production code
+  
+  - Cluster (Leader Election & Distributed Lock): Use github.com/caiflower/common-tools/cluster
+    - Initialize via cluster.NewCluster(constants.DefaultConfig.ClusterConfig)
+    - Add job tracker via c.AddJobTracker(cluster.NewDefaultJobTracker(constants.Prop.CallerInterval, &DefaultCaller{}))
+    - Register to resource manager: global.DefaultResourceManger.AddDaemon(c)
+    - Implement cluster.DefaultCaller interface for leader election callbacks:
+      - MasterCall(): called when this node becomes master
+      - SlaverCall(leaderName string): called when this node becomes slave
+    - CallerInterval (in Prop): interval for leader check (in seconds)
+    - ClusterConfig: managed in global config, includes election settings
+  
+  Code Organization:
+  - File Organization: Keep related functionality in the same file
+    - Configuration structs and functions should be in /constants/config.go, not scattered in multiple files
+    - Example: WatermarkConfig, KafkaTopicConfig should all be in config.go, not separate watermark_config.go or kafka_config.go
+    - Only create new files when introducing a completely new module or package
+  - Reuse Existing Files: Always check if an existing file can be extended before creating a new one
+    - Check /constants/ directory for existing config files before creating new ones
+    - Check /service/ directory for existing service files before creating new ones
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
