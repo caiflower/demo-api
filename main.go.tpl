@@ -30,10 +30,10 @@ func init() {
 	goai.Default().Config.CommonResponse = resp.Result{}
 	goai.Default().Config.CommonResponseDataField = "data"
 
-	runtime.GOMAXPROCS(4)
-
 	// initConfig
 	constants.InitConfig()
+
+	runtime.GOMAXPROCS(constants.Prop.GOMAXPROCS)
 	// initLogger
 	logger.InitLogger(&constants.DefaultConfig.LoggerConfig)
 	global.DefaultResourceManger.Add(logger.DefaultLogger())

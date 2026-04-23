@@ -17,5 +17,6 @@ func InitConfig() {
 }
 
 type Config struct {
+	GOMAXPROCS     int `yaml:"go_max_procs"`
 	CallerInterval int `yaml:"caller_interval"`
 }
