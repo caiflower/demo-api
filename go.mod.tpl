@@ -3,7 +3,7 @@ module {{ .MODULE }}
 go 1.18
 
 require (
-	github.com/caiflower/common-tools v0.0.0-20260421084004-f34be8d5ef38
+	github.com/caiflower/common-tools ceb1c1aa
 	google.golang.org/grpc v1.57.2
 	google.golang.org/protobuf v1.34.1
 )
