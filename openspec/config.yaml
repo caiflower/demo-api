@@ -138,6 +138,15 @@ context: |
     - SlaverCall(leaderName string): called when this node becomes slave
   - CallerInterval (in Prop, unit: seconds): interval for leader election checks
 
+  ### JSON Serialization 
+    - JSON Serialization: Use github.com/caiflower/common-tools/pkg/tools instead of encoding/json
+    - Use tools.Marshal(v) instead of json.Marshal(v)
+    - Use tools.Unmarshal(bytes, v) instead of json.Unmarshal(bytes, v)
+    - Use tools.ToJson(v) for string output, tools.ToByte(v) / tools.DeByte(bytes, v) for flexible conversion
+    - Underlying implementation uses jsoniter.ConfigFastest, significantly faster than standard library
+    - Do NOT import "encoding/json" in production code
+  
+
   ## Code Organization Rules
 
   - Keep related functionality in the same file; avoid scattering config across multiple files
@@ -148,6 +157,24 @@ context: |
   - New domain services → service/<domain>/<domain>.go
   - Before creating a new file, check if an existing file in that package can be extended
   - Only create a new package directory when introducing a fully separate domain or module
+
+  ## Infrastructure Client Rules
+
+  - Redis: MUST use `github.com/caiflower/common-tools/redis/v1`.NewRedisClient(config) to create Redis clients; NEVER use `github.com/go-redis/redis/v8`.NewClient() directly
+  - Redis: Get the underlying *redis.Client via type assertion on RedisClient.GetRedis().(*redis.Client) when needed by third-party libraries
+  - Redis: Configuration MUST come from `constants.DefaultConfig.RedisConfig[0]` (loaded from etc/default.yaml)
+  - Redis: Client lifecycle is managed by common-tools (global.DefaultResourceManger); do NOT manually close
+  - DB: MUST use `github.com/caiflower/common-tools/db/v1`.NewDBClient(config) via dao.Init(); NEVER create bun.DB directly
+  - ClickHouse: MUST use `github.com/caiflower/common-tools/ck` for ClickHouse client creation and query execution; NEVER use `github.com/ClickHouse/clickhouse-go/v2` directly
+  - ClickHouse: Configuration MUST come from `constants.DefaultConfig.ClickhouseConfig` (loaded from etc/default.yaml)
+  - ClickHouse: Client lifecycle is managed by common-tools (global.DefaultResourceManger); do NOT manually close
+  - Kafka: MUST use `github.com/caiflower/common-tools/kafka` for Kafka client creation and message production/consumption; NEVER use `github.com/IBM/sarama` or `github.com/confluentinc/confluent-kafka-go/kafka` directly
+  - Kafka: Configuration MUST come from `constants.DefaultConfig.KafkaConfig` (loaded from etc/default.yaml)
+  - Kafka: Client lifecycle is managed by common-tools (global.DefaultResourceManger); do NOT manually close
+  - HTTP Client: MUST use `github.com/caiflower/common-tools/web/app/client` for external HTTP calls; NEVER use net/http.Client directly
+  - JSON: MUST use `github.com/caiflower/common-tools/pkg/tools`.Marshal/Unmarshal; NEVER use encoding/json in production code
+  - Context Keys: Use new-api's `common.SetContextKey/GetContextKeyString` with `constant.ContextKeyXxx` for cross-middleware data passing (e.g. ContextKeyOriginalModel); do NOT invent custom context keys for data already covered by these constants
+  - Middleware order: Identity → ExtractModel → RateLimit → (future: Quota) → Handler
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
