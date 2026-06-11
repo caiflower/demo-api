@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/caiflower/common-tools/web"
-	"github.com/caiflower/common-tools/web/router/controller"
 	"{{ .MODULE }}/controller/v1/base"
 	"{{ .MODULE }}/controller/v1/hobby"
 	apihobby "{{ .MODULE }}/model/api/hobby"
