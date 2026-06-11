@@ -11,7 +11,7 @@ func InitConfig() {
 	if err := config.LoadDefaultConfig(&DefaultConfig); err != nil {
 		panic(err)
 	}
-	if err := config.LoadYamlFile("config.yaml", &Prop); err != nil {
+	if err := config.LoadYamlFile("config.yaml.tpl", &Prop); err != nil {
 		panic(err)
 	}
 }
