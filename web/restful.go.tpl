@@ -14,8 +14,8 @@ func register(engine *web.Engine) {
 	v1 := engine.Group("/v1")
 	{
 		helloController := &base.HelloWorldController{}
-		v1.Get("/helloworld", helloController.SayHelloWorld)
-		v1.Post("/req", helloController.DoRequest)
-		v1.GRPC(http.MethodGet, "/hobby/search", apihobby._Hobby_Search_Handler, &hobby.HobbyImpl{})
+		v1.GET("/helloworld", helloController.SayHelloWorld)
+		v1.POST("/req", helloController.DoRequest)
+		v1.GRPC(http.MethodGet, "/hobby/search", apihobby.Hobby_ServiceDesc.Methods[0].Handler, &hobby.HobbyImpl{})
 	}
 }

@@ -1,9 +1,6 @@
 package base
 
 import (
-	"strings"
-
-	"github.com/caiflower/common-tools/pkg/logger"
 	"github.com/caiflower/common-tools/web/common/e"
 	"{{ .MODULE }}/model/api/base"
 )
