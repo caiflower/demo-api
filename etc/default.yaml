@@ -29,8 +29,7 @@ database:
     connMaxLifetime: 28800      # unit: s
 
 redis:
-  - mode:
-    addrs:
+  - addrs:
       - redis-master.app.svc.cluster.local:6379
     password: test 
     readTimeout: 10s

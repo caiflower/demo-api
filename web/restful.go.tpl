@@ -11,19 +11,11 @@ import (
 )
 
 func register(engine *web.Engine) {
-
-	v1 := controller.NewRestFul().Group("/v1")
+	v1 := engine.Group("/v1")
 	{
-		helloController := engine.AddController(&base.HelloWorldController{})
-		engine.Register(v1.Method(http.MethodGet).Path("/helloworld").RegisterMethod(helloController.GetMethod("SayHelloWorld")))
-		engine.Register(v1.Method(http.MethodGet).Path("/error").RegisterMethod(helloController.GetMethod("ReturnError")))
-		engine.Register(v1.Method(http.MethodPost).Path("/req").RegisterMethod(helloController.GetMethod("DoRequest")))
-		engine.Register(v1.Method(http.MethodGet).Path("/repeat/:repeat").RegisterMethod(helloController.GetMethod("Repeat")))
-	}
-
-	{
-		hobbyController := engine.RegisterGRPCService(&apihobby.Hobby_ServiceDesc, &hobby.HobbyImpl{})
-		engine.Register(v1.Method(http.MethodGet).Path("/hobby").RegisterMethod(hobbyController.GetMethod("Search3")))
-		engine.Register(v1.Method(http.MethodGet).Path("/hobby/search").RegisterGrpcMethod(hobbyController.GetGrpcMethodDesc("Search")))
+		helloController := &base.HelloWorldController{}
+		v1.Get("/helloworld", helloController.SayHelloWorld)
+		v1.Post("/req", helloController.DoRequest)
+		v1.GRPC(http.MethodGet, "/hobby/search", apihobby._Hobby_Search_Handler, &hobby.HobbyImpl{})
 	}
 }
